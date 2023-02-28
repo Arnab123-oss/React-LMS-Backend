@@ -7,7 +7,7 @@ import ErrorHandler from "../utils/errorHandler.js";
 export const getAllCourses = catchAsyncError(async (req, res, next) => {
 
   // res.send("welcome");
-  const courses = await Course.find();
+  const courses = await Course.find().select("-lectures");
   res.status(200).json({
     success: true,
     courses,
@@ -15,11 +15,11 @@ export const getAllCourses = catchAsyncError(async (req, res, next) => {
 
 });
 
-export const createcCourse = catchAsyncError(async (req, res, next) => {
+export const createCourse = catchAsyncError(async (req, res, next) => {
 
-  const { title, decription, category, createdBy } = req.body;
+  const { title, description, category, createdBy } = req.body;
 
-  if (!title || !decription || !category || !createdBy) 
+  if (!title || !description || !category || !createdBy) 
   return next(new ErrorHandler("Please add all fields", 400));
 
 
@@ -28,7 +28,7 @@ export const createcCourse = catchAsyncError(async (req, res, next) => {
 
   await Course.create({
     title,
-    decription,
+    description,
     category,
     createdBy,
     poster: {
