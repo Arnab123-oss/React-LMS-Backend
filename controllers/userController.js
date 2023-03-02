@@ -186,6 +186,7 @@ export const addToPlaylist = catchAsyncError(async (req, res, next) => {
   })
 
   if (itemExist) return next(new ErrorHandler("Item Already Exist", 409))
+
   user.playlist.push({
     course: course._id,
     poster: course.poster.url,
@@ -212,7 +213,7 @@ export const removeFromPlaylist = catchAsyncError(async (req, res, next) => {
   if (!course) return next(new ErrorHandler("Invalid Course Id", 404))
 
   const newPlaylist = user.playlist.filter((item) => {
-    if (item.course.toString !== course._id.toString()) return item
+    if (item.course.toString() !== course._id.toString()) return item
   })
   user.playlist = newPlaylist;
   await user.save()
