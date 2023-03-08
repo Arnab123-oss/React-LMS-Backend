@@ -10,6 +10,7 @@ import nodeCron from "node-cron";
 
 import { Stats } from "./models/Stats.js";
 
+
 connectDB();
 
 cloudinary.v2.config({
