@@ -16,8 +16,6 @@ router.route("/courserequest").post(coueseRequest);
 
 // Get Admin Dashboard stats
 
-router
-  .route("/admin/stats")
-  .get(isAuthenticated, authorizedAdmin, getDashboardStats);
+router.route("/admin/stats").get(isAuthenticated, authorizedAdmin, getDashboardStats);
 
 export default router;
