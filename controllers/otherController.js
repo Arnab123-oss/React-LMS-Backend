@@ -2,6 +2,7 @@ import { catchAsyncError } from "../middlewares/catchAsyncError.js";
 import { sendEmail } from "../utils/sendEmail.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import { Stats } from "../models/Stats.js";
+
 export const contact = catchAsyncError(async (req, res, next) => {
   const { name, email, message } = req.body;
 
