@@ -7,14 +7,15 @@ export const contact = catchAsyncError(async (req, res, next) => {
   const { name, email, message } = req.body;
 
   if (!name || !email || !message)
-    return next(new ErrorHandler("All fields are mendatory", 400));
+    return next(new ErrorHandler("All fields are mandatory", 400));
 
   const to = process.env.MY_MAIL;
-
+  const from = email;
   const subject = "Contact from Company name";
   const text = `I am ${name} and my Email is ${email}. \n${message}`;
+  // console.log(from);
 
-  await sendEmail(to, subject, text);
+  await sendEmail(to, subject, text,from);
 
   res.status(200).json({
     success: true,
@@ -74,7 +75,8 @@ export const getDashboardStats = catchAsyncError(async (req, res, next) => {
 
   if (statsData[10].users === 0) userPercentage = usersCount * 100;
   if (statsData[10].views === 0) viewsPercentage = viewsCount * 100;
-  if (statsData[10].subscription === 0) subscriptionPercentage = subscriptionCount * 100;
+  if (statsData[10].subscription === 0)
+    subscriptionPercentage = subscriptionCount * 100;
   else {
     const difference = {
       users: statsData[11].users - statsData[10].users,
@@ -98,11 +100,11 @@ export const getDashboardStats = catchAsyncError(async (req, res, next) => {
     usersCount,
     subscriptionCount,
     viewsCount,
-    userProfit,
-    viewsProfit,
-    subscriptionProfit,
-    userPercentage,
-    viewsPercentage,
     subscriptionPercentage,
+    viewsPercentage,
+    userPercentage,
+    subscriptionProfit,
+    viewsProfit,
+    userProfit,
   });
 });
