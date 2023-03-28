@@ -155,7 +155,7 @@ export const forgetPassword = catchAsyncError(async (req, res, next) => {
 
   //send Token Via email
   const url = `${process.env.FRONTEND_URL}/resetpassword/${resetToken}`;
-  const message = `Click on the link to reset your password ${url},If you have not requested
+  const message = `Click on the link to reset your password ${url} ,If you have not requested
   then please ignore`;
 
   await sendEmail(user.email, "Mail for Reset Password", message);
