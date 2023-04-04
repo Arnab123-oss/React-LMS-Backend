@@ -13,7 +13,7 @@ router.route("/paymentverification").post(isAuthenticated,paymentVeification)
 
 //Get Razorpay key
 
-router.route("/razorpaykey").post(getRazorPayKey)
+router.route("/razorpaykey").get(getRazorPayKey)
 
 
 //Cancel Subscription
